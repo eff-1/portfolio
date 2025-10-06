@@ -4,11 +4,7 @@ import {
   Phone,
   MapPin,
   Send,
-  MessageCircle,
-  Github,
-  Linkedin,
-  Instagram,
-  Twitter
+  MessageCircle
 } from 'lucide-react';
 import '../styles/Contact.css';
 
@@ -49,10 +45,10 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { name: 'GitHub', icon: Github, url: 'https://github.com/haftech', color: '#333' },
-    { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/haftech', color: '#0077b5' },
-    { name: 'Twitter', icon: Twitter, url: 'https://twitter.com/haftech', color: '#1da1f2' },
-    { name: 'Instagram', icon: Instagram, url: 'https://instagram.com/haftech', color: '#e4405f' }
+    { name: 'GitHub', icon: '🐙', url: 'https://github.com/eff-1', color: '#333' },
+    { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/in/haftech', color: '#0077b5' },
+    { name: 'Twitter', icon: '🐦', url: 'https://twitter.com/haftech', color: '#1da1f2' },
+    { name: 'Instagram', icon: '📸', url: 'https://instagram.com/haftech', color: '#e4405f' }
   ];
 
   const quickContactMethods = [
@@ -88,7 +84,8 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/contact', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -180,24 +177,22 @@ const Contact = () => {
             <div className="social-section">
               <h4>Follow Me</h4>
               <div className="social-links">
-                {socialLinks.map((social, index) => {
-                  const IconComponent = social.icon;
-                  return (
-                    <a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-link"
-                      style={{ '--social-color': social.color }}
-                      data-aos="flip-left"
-                      data-aos-delay={600 + index * 100}
-                      aria-label={social.name}
-                    >
-                      <IconComponent size={20} />
-                    </a>
-                  );
-                })}
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                    style={{ '--social-color': social.color }}
+                    data-aos="flip-left"
+                    data-aos-delay={600 + index * 100}
+                    aria-label={social.name}
+                    title={social.name}
+                  >
+                    <span className="social-icon">{social.icon}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
