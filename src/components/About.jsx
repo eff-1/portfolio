@@ -69,7 +69,7 @@ const About = () => {
           <div className="about-main">
             <div className="about-image" data-aos="fade-right">
               <div className="image-container">
-                <img src="/assets/projects/profile-image.jpg" alt="Ariyo Faruq" />
+                <img src="assets/projects/profile-image.jpg" alt="Ariyo Faruq"/>
                 <div className="image-overlay">
                   <div className="overlay-content">
                     <h3>HafTech CEO</h3>
