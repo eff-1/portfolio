@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronUp, Heart, Code2 } from 'lucide-react';
+import '../styles/Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
