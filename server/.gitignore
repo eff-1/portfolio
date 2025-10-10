@@ -3,12 +3,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-
-# Production builds
-dist/
-build/
-out/
 
 # Environment variables
 .env
@@ -17,53 +11,27 @@ out/
 .env.test.local
 .env.production.local
 
-# IDE and editors
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
 # Logs
-logs/
+logs
 *.log
 
 # Runtime data
-pids/
+pids
 *.pid
 *.seed
 *.pid.lock
 
 # Coverage directory used by tools like istanbul
 coverage/
-*.lcov
 
 # nyc test coverage
-.nyc_output/
+.nyc_output
 
 # Dependency directories
 jspm_packages/
 
 # Optional npm cache directory
 .npm
-
-# Optional eslint cache
-.eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
 
 # Optional REPL history
 .node_repl_history
@@ -74,43 +42,24 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache/
-.parcel-cache/
+# dotenv environment variables file
+.env
 
-# Next.js build output
-.next/
-
-# Nuxt.js build / generate output
-.nuxt/
-
-# Gatsby files
-.cache/
-public/
-
-# Storybook build outputs
-.out/
-.storybook-out/
-
-# Temporary folders
-tmp/
-temp/
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+# IDE files
+.vscode/
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+*.swp
+*.swo
 
-# Local Netlify folder
-.netlify/
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Vercel
-.vercel/
-
-# Supabase
-.supabase/
+# Build outputs
+dist/
+build/

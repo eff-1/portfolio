@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: portfolio-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SUPABASE_URL
+        fromDatabase:
+          name: supabase_url
+          property: connectionString
+      - key: SUPABASE_ANON_KEY
+        fromDatabase:
+          name: supabase_anon_key
+          property: connectionString
+      - key: SUPABASE_SECRET_KEY
+        fromDatabase:
+          name: supabase_secret_key
+          property: connectionString
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_SECURE
+        value: false
+      - key: SMTP_USER
+        fromDatabase:
+          name: smtp_user
+          property: connectionString
+      - key: SMTP_PASS
+        fromDatabase:
+          name: smtp_pass
+          property: connectionString
+      - key: SMTP_FROM
+        fromDatabase:
+          name: smtp_from
+          property: connectionString
+      - key: ADMIN_EMAIL
+        fromDatabase:
+          name: admin_email
+          property: connectionString

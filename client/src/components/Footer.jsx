@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronUp, Heart, Code2 } from 'lucide-react';
+import '../styles/Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -38,7 +39,7 @@ const Footer = () => {
               by <strong>Ariyo Faruq</strong> • CEO & Founder, HafTech
             </p>
             <p>
-              &copy; {currentYear} HafTech. All rights reserved. Built with React & Vite.
+              &copy; {currentYear} HafTech. All rights reserved.
             </p>
           </div>
         </div>
