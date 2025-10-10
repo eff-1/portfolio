@@ -4,7 +4,12 @@ import {
   Phone,
   MapPin,
   Send,
-  MessageCircle
+  MessageCircle,
+  Github,
+  Linkedin,
+  Twitter,
+  Instagram,
+  ExternalLink
 } from 'lucide-react';
 import '../styles/Contact.css';
 
@@ -45,39 +50,49 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { name: 'GitHub', icon: '🐙', url: 'https://github.com/eff-1', color: '#333' },
-    { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/in/haftech', color: '#0077b5' },
-    { name: 'Twitter', icon: '🐦', url: 'https://twitter.com/haftech', color: '#1da1f2' },
-    { name: 'Instagram', icon: '📸', url: 'https://instagram.com/haftech', color: '#e4405f' }
+    { name: 'GitHub', icon: Github, url: 'https://github.com/eff-1', color: '#333' },
+    { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/haftech', color: '#0077b5' },
+    { name: 'Twitter', icon: Twitter, url: 'https://twitter.com/haftech', color: '#1da1f2' },
+    { name: 'Instagram', icon: Instagram, url: 'https://instagram.com/haftech', color: '#e4405f' }
   ];
 
   const quickContactMethods = [
     {
       name: 'WhatsApp',
-      icon: '💬',
+      icon: MessageCircle,
       url: 'https://wa.me/+2348128653553?text=Hello,%20I%20would%20like%20to%20discuss%20a%20potential%20project%20collaboration',
       color: '#25d366',
-      description: 'Chat on WhatsApp'
+      description: 'WhatsApp'
     },
     {
       name: 'Telegram',
-      icon: '📱',
+      icon: Send,
       url: 'https://t.me/Haftechofficial',
       color: '#0088cc',
-      description: 'Message on Telegram'
+      description: 'Telegram'
     },
     {
       name: 'Email',
-      icon: '✉️',
-      url: 'mailto:contact@haftech.com?subject=Project%20Inquiry',
+      icon: Mail,
+      url: 'mailto:ariyofaruq1@gmail.com?subject=Project%20Inquiry',
       color: '#ea4335',
-      description: 'Send Direct Email'
+      description: 'Direct Email'
     }
   ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFocus = () => {
+    const form = document.querySelector('.contact-form');
+    if (form) form.classList.add('active');
+  };
+
+  const handleBlur = () => {
+    const form = document.querySelector('.contact-form');
+    if (form) form.classList.remove('active');
   };
 
   const handleSubmit = async (e) => {
@@ -155,44 +170,50 @@ const Contact = () => {
             <div className="quick-contact">
               <h4>Quick Contact</h4>
               <div className="quick-methods">
-                {quickContactMethods.map((method, index) => (
-                  <a
-                    key={method.name}
-                    href={method.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="quick-method"
-                    style={{ '--method-color': method.color }}
-                    data-aos="zoom-in"
-                    data-aos-delay={400 + index * 100}
-                  >
-                    <span className="method-icon">{method.icon}</span>
-                    <span className="method-text">{method.description}</span>
-                  </a>
-                ))}
+                {quickContactMethods.map((method, index) => {
+                  const IconComponent = method.icon;
+                  return (
+                    <a
+                      key={method.name}
+                      href={method.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="quick-method"
+                      style={{ '--method-color': method.color }}
+                      data-aos="zoom-in"
+                      data-aos-delay={400 + index * 100}
+                    >
+                      <IconComponent size={18} className="method-icon" />
+                      <span className="method-text">{method.description}</span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
             {/* Social Links */}
             <div className="social-section">
-              <h4>Follow Me</h4>
+              <h4>Find Me Online</h4>
               <div className="social-links">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-link"
-                    style={{ '--social-color': social.color }}
-                    data-aos="flip-left"
-                    data-aos-delay={600 + index * 100}
-                    aria-label={social.name}
-                    title={social.name}
-                  >
-                    <span className="social-icon">{social.icon}</span>
-                  </a>
-                ))}
+                {socialLinks.map((social, index) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                      style={{ '--social-color': social.color }}
+                      data-aos="flip-left"
+                      data-aos-delay={600 + index * 100}
+                      aria-label={social.name}
+                      title={social.name}
+                    >
+                      <IconComponent size={20} />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -214,6 +235,8 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     placeholder="Your full name"
                     required
                     className="form-input"
@@ -228,6 +251,8 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     placeholder="your.email@example.com"
                     required
                     className="form-input"
@@ -243,6 +268,8 @@ const Contact = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleInputChange}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                   placeholder="Project discussion, collaboration, etc."
                   required
                   className="form-input"
@@ -256,6 +283,8 @@ const Contact = () => {
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                   placeholder="Tell me about your project, requirements, timeline..."
                   required
                   className="form-textarea"
@@ -316,31 +345,38 @@ const Contact = () => {
         {/* Additional Contact Options */}
         <div className="additional-contact" data-aos="fade-up">
           <div className="contact-cta">
-            <h3>Ready to Start Your Project?</h3>
-            <p>
-              Let's discuss your requirements and bring your vision to life with cutting-edge
-              technology
-            </p>
-            <div className="cta-buttons">
-              <a
-                href="https://wa.me/+2348128653553?text=Hi%20Faruq,%20I'm%20ready%20to%20start%20my%20project.%20Let's%20discuss!"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary cta-btn"
-              >
-                <MessageCircle size={18} />
-                Start Project Discussion
-              </a>
-              <a
-                href="#portfolio"
-                className="btn btn-outline cta-btn"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                View My Work
-              </a>
+            <div className="cta-content">
+              <div className="cta-text">
+                <h3>Ready to Start Your Project?</h3>
+              </div>
+              <div className="cta-details">
+                <p>
+                  Let's discuss your requirements and bring your vision to life with cutting-edge
+                  technology
+                </p>
+                <div className="cta-buttons">
+                  <a
+                    href="https://wa.me/+2348128653553?text=Hi%20Faruq,%20I'm%20ready%20to%20start%20my%20project.%20Let's%20discuss!"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary cta-btn"
+                  >
+                    <MessageCircle size={18} />
+                    Start Project Discussion
+                  </a>
+                  <a
+                    href="#portfolio"
+                    className="btn btn-outline cta-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    <ExternalLink size={18} />
+                    View My Work
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

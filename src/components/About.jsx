@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Code2, Server, Cloud, Filter } from 'lucide-react';
+import { 
+  Code2, Server, Cloud, Filter, Zap, FileCode, Palette, Braces,
+  Globe, Database, HardDrive, Terminal, GitBranch, Package, Rocket, 
+  Figma, Paintbrush, Code, Send
+} from 'lucide-react';
 import { skillsData, mainSkills } from '../utils/skills';
 import '../styles/About.css';
+import profileImage from '../assets/profile-image.jpg';
 
 const About = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [skillsVisible, setSkillsVisible] = useState(false);
 
+  // Icon mapping for skills
+  const getSkillIcon = (iconName) => {
+    const icons = {
+      Code2, Zap, FileCode, Palette, Braces, Server, Globe, 
+      Database, HardDrive, Terminal, GitBranch, Package, 
+      Cloud, Rocket, Figma, Paintbrush, Code, Send
+    };
+    return icons[iconName] || Code2;
+  };
+
   const skillCategories = [
     { id: 'all', label: 'All Skills', icon: Filter },
     { id: 'frontend', label: 'Frontend', icon: Code2 },
     { id: 'backend', label: 'Backend', icon: Server },
-    { id: 'devops', label: 'DevOps', icon: Cloud }
+    { id: 'tools', label: 'Tools', icon: Cloud }
   ];
 
   useEffect(() => {
@@ -69,7 +84,7 @@ const About = () => {
           <div className="about-main">
             <div className="about-image" data-aos="fade-right">
               <div className="image-container">
-                <img src="assets/projects/profile-image.jpg" alt="Ariyo Faruq"/>
+                <img src={profileImage} alt="Ariyo Faruq"/>
                 <div className="image-overlay">
                   <div className="overlay-content">
                     <h3>HafTech CEO</h3>
@@ -116,7 +131,7 @@ const About = () => {
 
                 {/* Main Skills Progress */}
                 <div className="main-skills">
-                  <h4>Core Competencies</h4>
+                  <h4>⚙️ Core Competencies</h4>
                   {mainSkills.map((skill, index) => (
                     <div key={skill.name} className="skill-bar" data-aos="fade-up" data-aos-delay={index * 100}>
                       <div className="skill-info">
@@ -181,22 +196,11 @@ const About = () => {
                   }}
                 >
                   <div className="skill-icon">
-                    <span>{skill.icon}</span>
+                    {React.createElement(getSkillIcon(skill.icon), { size: 20 })}
                   </div>
                   <div className="skill-info">
                     <h4 className="skill-title">{skill.name}</h4>
-                    <div className="skill-level">
-                      <div className="level-bar">
-                        <div 
-                          className="level-fill"
-                          style={{ 
-                            width: skillsVisible ? `${skill.level}%` : '0%',
-                            animationDelay: `${index * 0.1}s`
-                          }}
-                        ></div>
-                      </div>
-                      <span className="level-text">{skill.level}%</span>
-                    </div>
+                    <span className="skill-percentage">{skill.level}%</span>
                   </div>
                 </div>
               ))}

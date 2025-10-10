@@ -39,7 +39,7 @@ const Footer = () => {
               by <strong>Ariyo Faruq</strong> • CEO & Founder, HafTech
             </p>
             <p>
-              &copy; {currentYear} HafTech. All rights reserved. Built with React & Vite.
+              &copy; {currentYear} HafTech. All rights reserved.
             </p>
           </div>
         </div>
