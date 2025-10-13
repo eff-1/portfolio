@@ -130,10 +130,13 @@ const Hero = () => {
           {/* Right Content */}
           <div className="hero-right" data-aos="fade-left" data-aos-delay="1200">
             <div className="hero-philosophy">
-              <p>
-                <span className="quote-mark">"</span>I believe technology should inspire. At HafTech, I craft 
-                intuitive, powerful products where creativity and engineering 
-                bring ideas to&nbsp;life.<span className="quote-mark">"</span>
+              <div className="typing-lines">
+                <p className="typing-line line-1">I believe technology should inspire and empower people to achieve more.</p>
+                <p className="typing-line line-2">At HafTech, I craft intuitive, powerful products where</p>
+                <p className="typing-line line-3">creativity meets engineering excellence.</p>
+              </div>
+              <p className="mobile-only" style={{marginTop: '1.5rem', opacity: 0.9}}>
+                Building cutting-edge solutions that make a difference in the digital world.
               </p>
             </div>
 

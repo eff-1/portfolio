@@ -9,7 +9,10 @@ import '../styles/About.css';
 import profileImage from '../assets/profile-image.jpg';
 
 const About = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
+  // Show 'frontend' by default on mobile, 'all' on desktop
+  const [activeCategory, setActiveCategory] = useState(
+    window.innerWidth < 768 ? 'frontend' : 'all'
+  );
   const [skillsVisible, setSkillsVisible] = useState(false);
 
   // Icon mapping for skills
@@ -38,12 +41,18 @@ const About = () => {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
+    // Observe both skills section and main skills (core competencies)
     const skillsSection = document.querySelector('.skills-section');
+    const mainSkillsSection = document.querySelector('.main-skills');
+    
     if (skillsSection) {
       observer.observe(skillsSection);
+    }
+    if (mainSkillsSection) {
+      observer.observe(mainSkillsSection);
     }
 
     return () => observer.disconnect();

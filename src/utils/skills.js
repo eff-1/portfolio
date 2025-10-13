@@ -1,4 +1,4 @@
-// Skills data organized by categories - Compact
+// Skills data organized by categories - Compact (8 each = 24 total)
 export const skillsData = {
   frontend: {
     title: "Frontend",
@@ -10,7 +10,9 @@ export const skillsData = {
       { name: "TypeScript", level: 85, icon: "FileCode" },
       { name: "Tailwind", level: 92, icon: "Palette" },
       { name: "JavaScript", level: 94, icon: "Braces" },
-      { name: "CSS3", level: 96, icon: "Paintbrush" }
+      { name: "CSS3", level: 96, icon: "Paintbrush" },
+      { name: "HTML5", level: 98, icon: "Globe" },
+      { name: "Vue.js", level: 80, icon: "Zap" }
     ]
   },
   backend: {
@@ -23,7 +25,9 @@ export const skillsData = {
       { name: "PostgreSQL", level: 82, icon: "Database" },
       { name: "MongoDB", level: 78, icon: "HardDrive" },
       { name: "Python", level: 85, icon: "Terminal" },
-      { name: "PHP", level: 83, icon: "Code" }
+      { name: "PHP", level: 83, icon: "Code" },
+      { name: "MySQL", level: 85, icon: "Database" },
+      { name: "GraphQL", level: 75, icon: "Code2" }
     ]
   },
   tools: {
@@ -36,7 +40,9 @@ export const skillsData = {
       { name: "AWS", level: 80, icon: "Cloud" },
       { name: "Vercel", level: 90, icon: "Rocket" },
       { name: "Figma", level: 88, icon: "Figma" },
-      { name: "Postman", level: 85, icon: "Send" }
+      { name: "Postman", level: 85, icon: "Send" },
+      { name: "VS Code", level: 95, icon: "Code2" },
+      { name: "Netlify", level: 88, icon: "Globe" }
     ]
   }
 };

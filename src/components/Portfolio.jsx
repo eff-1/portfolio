@@ -1,81 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ExternalLink, Github, Eye, X, Filter, Play, Pause } from 'lucide-react';
-import { projectsData, categories } from '../utils/projects';
-import Modal from './Modal';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronLeft, ChevronRight, ExternalLink, Github, Eye, X, Plus } from 'lucide-react';
+import { projectsData } from '../utils/projects';
 import '../styles/Portfolio.css';
 
 const Portfolio = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [selectedTechs, setSelectedTechs] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [flippedCards, setFlippedCards] = useState(new Set());
-  const [autoPlay, setAutoPlay] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [showAllTechs, setShowAllTechs] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const mobileSliderRef = useRef(null);
 
-  const filteredProjects = projectsData.filter(project => 
-    activeFilter === 'all' || project.category === activeFilter
-  );
-
-  // Desktop: 3 cards per slide, Mobile: 1 card per slide
-  const getItemsPerSlide = () => {
-    return window.innerWidth <= 768 ? 1 : 3;
-  };
-
-  const [itemsPerSlide, setItemsPerSlide] = useState(getItemsPerSlide());
+  // All available technologies from projects
+  const allTechs = [...new Set(projectsData.flatMap(p => p.technologies))];
+  
+  // Key technologies to show upfront
+  const keyTechs = ['React', 'Node.js', 'TypeScript', 'JavaScript'];
+  const otherTechs = allTechs.filter(tech => !keyTechs.includes(tech));
 
   useEffect(() => {
-    const handleResize = () => {
-      setItemsPerSlide(getItemsPerSlide());
-      setCurrentSlide(0); // Reset slide on resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
     };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Auto-play carousel
-  useEffect(() => {
-    if (!autoPlay) return;
+  // Filter projects based on selected technologies
+  const filteredProjects = selectedTechs.length === 0 
+    ? projectsData 
+    : projectsData.filter(project => 
+        selectedTechs.some(tech => 
+          project.technologies.some(pTech => 
+            pTech.toLowerCase().includes(tech.toLowerCase())
+          )
+        )
+      );
 
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [currentSlide, filteredProjects.length, itemsPerSlide, autoPlay]);
-
-  // Auto-flip cards timer
-  useEffect(() => {
-    const flipInterval = setInterval(() => {
-      const visibleProjects = getVisibleProjects();
-      if (visibleProjects.length > 0) {
-        const randomIndex = Math.floor(Math.random() * visibleProjects.length);
-        const projectId = visibleProjects[randomIndex].id;
-        
-        setFlippedCards(prev => {
-          const newSet = new Set(prev);
-          if (newSet.has(projectId)) {
-            newSet.delete(projectId);
-          } else {
-            newSet.add(projectId);
-          }
-          return newSet;
-        });
-
-        // Auto flip back after 3 seconds
-        setTimeout(() => {
-          setFlippedCards(prev => {
-            const newSet = new Set(prev);
-            newSet.delete(projectId);
-            return newSet;
-          });
-        }, 3000);
-      }
-    }, 2000);
-
-    return () => clearInterval(flipInterval);
-  }, [currentSlide, filteredProjects]);
-
-  const totalSlides = Math.ceil(filteredProjects.length / itemsPerSlide);
+  const projectsPerSlide = 3;
+  const totalSlides = Math.ceil(filteredProjects.length / projectsPerSlide);
 
   const nextSlide = () => {
     setCurrentSlide(prev => (prev + 1) % totalSlides);
@@ -85,69 +50,191 @@ const Portfolio = () => {
     setCurrentSlide(prev => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  const getVisibleProjects = () => {
-    const start = currentSlide * itemsPerSlide;
-    return filteredProjects.slice(start, start + itemsPerSlide);
-  };
-
-  const handleCardClick = (project) => {
-    const projectId = project.id;
-    if (flippedCards.has(projectId)) {
-      // If already flipped, open modal on second click
-      setSelectedProject(project);
-    } else {
-      // First click - flip the card
-      setFlippedCards(prev => new Set(prev).add(projectId));
-    }
-  };
-
-  const handleFilterChange = (filter) => {
-    setActiveFilter(filter);
+  const handleTechToggle = (tech) => {
+    setSelectedTechs(prev => 
+      prev.includes(tech) 
+        ? prev.filter(t => t !== tech)
+        : [...prev, tech]
+    );
     setCurrentSlide(0);
-    setFlippedCards(new Set()); // Clear flipped cards when filter changes
+  };
+
+  const clearFilters = () => {
+    setSelectedTechs([]);
+    setCurrentSlide(0);
+  };
+
+  // Mobile swipe handling
+  const handleMobileScroll = (e) => {
+    if (!isMobile || !mobileSliderRef.current) return;
+    
+    const container = mobileSliderRef.current;
+    const cardWidth = container.children[0]?.offsetWidth || 0;
+    const scrollLeft = container.scrollLeft;
+    const newIndex = Math.round(scrollLeft / cardWidth);
+    
+    if (newIndex !== currentSlide) {
+      setCurrentSlide(newIndex);
+    }
   };
 
   return (
     <section id="portfolio" className="portfolio-section">
       <div className="container">
-        {/* Desktop Layout */}
-        <div className="desktop-portfolio">
-          <div className="portfolio-header">
-            <div className="header-content" data-aos="fade-right">
+        {isMobile ? (
+          // MOBILE: Instagram Story Style
+          <div className="mobile-portfolio">
+            <div className="mobile-header">
               <h2 className="section-title">Portfolio</h2>
+              <div className="title-underline"></div>
               <p className="section-subtitle">
-                Explore my latest web development projects showcasing modern technologies and innovative solutions
+                Swipe to explore my projects
               </p>
-              
-              {/* Desktop Filters */}
-              <div className="desktop-filters">
-                {categories.map(category => (
+            </div>
+
+            {/* Mobile Tech Filters */}
+            <div className="mobile-tech-filters">
+              <div className="mobile-filter-container">
+                {keyTechs.map(tech => (
                   <button
-                    key={category.id}
-                    className={`filter-btn ${activeFilter === category.id ? 'active' : ''}`}
-                    onClick={() => handleFilterChange(category.id)}
+                    key={tech}
+                    className={`mobile-tech-filter ${selectedTechs.includes(tech) ? 'active' : ''}`}
+                    onClick={() => handleTechToggle(tech)}
                   >
-                    <Filter size={16} />
-                    {category.name}
-                    <span className="count">{category.count}</span>
+                    {tech}
                   </button>
                 ))}
+                
+                <button
+                  className="mobile-more-tech-btn"
+                  onClick={() => setShowAllTechs(true)}
+                >
+                  <Plus size={12} />
+                  More
+                </button>
+
+                {selectedTechs.length > 0 && (
+                  <button className="mobile-clear-filters" onClick={clearFilters}>
+                    Clear
+                  </button>
+                )}
               </div>
             </div>
 
-            <div className="portfolio-carousel" data-aos="fade-left">
-              {/* Carousel Controls */}
-              <div className="carousel-controls">
-                <div className="slide-controls">
+            <div 
+              className="mobile-slider"
+              ref={mobileSliderRef}
+              onScroll={handleMobileScroll}
+            >
+              {filteredProjects.map((project, index) => (
+                <MobileProjectCard
+                  key={project.id}
+                  project={project}
+                  onClick={() => setSelectedProject(project)}
+                  isActive={index === currentSlide}
+                />
+              ))}
+            </div>
+
+            <div className="mobile-indicators">
+              {filteredProjects.map((_, index) => (
+                <div
+                  key={index}
+                  className={`mobile-dot ${index === currentSlide ? 'active' : ''}`}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          // DESKTOP: Professional Layout
+          <div className="desktop-portfolio">
+            <div className="portfolio-layout">
+              {/* Left Side - Header */}
+              <div className="portfolio-header">
+                <h2 className="section-title">Portfolio</h2>
+                <div className="title-underline"></div>
+                <p className="section-description">
+                  Explore my latest web development projects showcasing modern technologies and innovative solutions
+                </p>
+              </div>
+
+              {/* Right Side - Carousel */}
+              <div className="portfolio-carousel">
+                {/* Tech Filters */}
+                <div className="tech-filters">
+                  <div className="filter-container">
+                    {keyTechs.map(tech => (
+                      <button
+                        key={tech}
+                        className={`tech-filter ${selectedTechs.includes(tech) ? 'active' : ''}`}
+                        onClick={() => handleTechToggle(tech)}
+                      >
+                        {tech}
+                      </button>
+                    ))}
+                    
+                    <button
+                      className="more-tech-btn"
+                      onClick={() => setShowAllTechs(true)}
+                    >
+                      <Plus size={14} />
+                      More
+                    </button>
+
+                    {selectedTechs.length > 0 && (
+                      <button className="clear-filters" onClick={clearFilters}>
+                        Clear All
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Projects Carousel */}
+                <div className="projects-carousel">
                   <button 
-                    className="control-btn prev" 
+                    className="carousel-arrow prev"
                     onClick={prevSlide}
                     disabled={totalSlides <= 1}
                   >
-                    <ChevronLeft size={20} />
+                    <ChevronLeft size={24} />
                   </button>
-                  
-                  <div className="slide-indicators">
+
+                  <div className="carousel-container">
+                    <div 
+                      className="carousel-track"
+                      style={{
+                        transform: `translateX(-${currentSlide * 100}%)`,
+                        width: `${totalSlides * 100}%`
+                      }}
+                    >
+                      {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+                        <div key={slideIndex} className="carousel-slide">
+                          {filteredProjects
+                            .slice(slideIndex * projectsPerSlide, (slideIndex + 1) * projectsPerSlide)
+                            .map((project) => (
+                              <DesktopProjectCard
+                                key={project.id}
+                                project={project}
+                                onClick={() => setSelectedProject(project)}
+                              />
+                            ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button 
+                    className="carousel-arrow next"
+                    onClick={nextSlide}
+                    disabled={totalSlides <= 1}
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+
+                {/* Carousel Indicators */}
+                {totalSlides > 1 && (
+                  <div className="carousel-indicators">
                     {Array.from({ length: totalSlides }).map((_, index) => (
                       <button
                         key={index}
@@ -156,217 +243,240 @@ const Portfolio = () => {
                       />
                     ))}
                   </div>
-                  
-                  <button 
-                    className="control-btn next" 
-                    onClick={nextSlide}
-                    disabled={totalSlides <= 1}
-                  >
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
-
-                <button 
-                  className={`autoplay-btn ${autoPlay ? 'active' : ''}`}
-                  onClick={() => setAutoPlay(!autoPlay)}
-                  title={autoPlay ? 'Pause autoplay' : 'Start autoplay'}
-                >
-                  {autoPlay ? <Pause size={16} /> : <Play size={16} />}
-                </button>
-              </div>
-
-              {/* Projects Grid */}
-              <div className="projects-carousel">
-                <div 
-                  className="carousel-track"
-                  style={{
-                    transform: `translateX(-${currentSlide * 100}%)`,
-                    width: `${totalSlides * 100}%`
-                  }}
-                >
-                  {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-                    <div key={slideIndex} className="carousel-slide">
-                      {filteredProjects
-                        .slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide)
-                        .map((project) => (
-                          <ProjectCard
-                            key={project.id}
-                            project={project}
-                            isFlipped={flippedCards.has(project.id)}
-                            onClick={() => handleCardClick(project)}
-                            onViewProject={() => setSelectedProject(project)}
-                          />
-                        ))}
-                    </div>
-                  ))}
-                </div>
+                )}
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="mobile-portfolio">
-          <div className="mobile-header" data-aos="fade-up">
-            <h2 className="section-title">Portfolio</h2>
-            <p className="section-subtitle">
-              Explore my latest projects
-            </p>
-          </div>
-
-          {/* Mobile Filters */}
-          <div className="mobile-filters" data-aos="fade-up" data-aos-delay="200">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                className={`mobile-filter-btn ${activeFilter === category.id ? 'active' : ''}`}
-                onClick={() => handleFilterChange(category.id)}
-              >
-                {category.name}
-                <span className="count">{category.count}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile Projects */}
-          <div className="mobile-projects" data-aos="fade-up" data-aos-delay="400">
-            {filteredProjects.slice(0, 6).map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                isFlipped={flippedCards.has(project.id)}
-                onClick={() => handleCardClick(project)}
-                onViewProject={() => setSelectedProject(project)}
-                mobile={true}
-                delay={index * 100}
-              />
-            ))}
-            
-            {filteredProjects.length > 6 && (
-              <button className="load-more-btn">
-                <Eye size={16} />
-                View More Projects
-              </button>
-            )}
-          </div>
-        </div>
+        )}
       </div>
+
+      {/* Tech Selection Modal */}
+      {showAllTechs && (
+        <div className="tech-modal-overlay" onClick={() => setShowAllTechs(false)}>
+          <div className="tech-modal" onClick={e => e.stopPropagation()}>
+            <div className="tech-modal-header">
+              <h3>Select Technologies</h3>
+              <button onClick={() => setShowAllTechs(false)}>
+                <X size={20} />
+              </button>
+            </div>
+            <div className="tech-grid">
+              {allTechs.map(tech => (
+                <button
+                  key={tech}
+                  className={`tech-option ${selectedTechs.includes(tech) ? 'selected' : ''}`}
+                  onClick={() => handleTechToggle(tech)}
+                >
+                  {tech}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Project Modal */}
       {selectedProject && (
-        <Modal onClose={() => setSelectedProject(null)}>
-          <ProjectModal project={selectedProject} />
-        </Modal>
+        <ProjectModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
       )}
     </section>
   );
 };
 
-// Project Card Component
-const ProjectCard = ({ project, isFlipped, onClick, onViewProject, mobile = false, delay = 0 }) => {
+// Mobile Project Card Component
+const MobileProjectCard = ({ project, onClick, isActive }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = project.images || [project.image];
+  const hasMultipleImages = images.length > 1;
+
+  useEffect(() => {
+    if (hasMultipleImages) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex(prev => (prev + 1) % images.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [hasMultipleImages, images.length]);
+
   return (
     <div 
-      className={`project-card ${isFlipped ? 'flipped' : ''} ${mobile ? 'mobile-card' : ''}`}
+      className={`mobile-project-card ${isActive ? 'active' : ''}`}
       onClick={onClick}
-      data-aos="zoom-in"
-      data-aos-delay={delay}
     >
-      <div className="card-inner">
-        {/* Front of card */}
-        <div className="card-front">
-          <div className="project-image">
-            <img src={project.image} alt={project.title} />
-            <div className="image-overlay">
-              <Eye size={24} />
-            </div>
-          </div>
-          <div className="project-info">
-            <h3 className="project-title">{project.title}</h3>
-            <p className="project-category">{project.category}</p>
-          </div>
+      <div className="mobile-card-image">
+        <img src={images[currentImageIndex]} alt={project.title} />
+        <div className="mobile-card-overlay">
+          <Eye size={20} />
         </div>
-
-        {/* Back of card */}
-        <div className="card-back">
-          <div className="back-content">
-            <h3 className="project-title">{project.title}</h3>
-            <p className="project-description">{project.description}</p>
-            
-            <div className="tech-stack">
-              {project.technologies.slice(0, 3).map((tech, index) => (
-                <span key={index} className="tech-tag">{tech}</span>
-              ))}
-            </div>
-
-            <div className="project-actions">
-              <a 
-                href={project.liveLink} 
-                className="action-btn primary"
-                onClick={(e) => e.stopPropagation()}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink size={16} />
-                Live Demo
-              </a>
-              <a 
-                href={project.githubLink}
-                className="action-btn secondary"
-                onClick={(e) => e.stopPropagation()}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github size={16} />
-                Code
-              </a>
-            </div>
+        {hasMultipleImages && (
+          <div className="mobile-image-indicators">
+            {images.map((_, index) => (
+              <div
+                key={index}
+                className={`mobile-image-dot ${index === currentImageIndex ? 'active' : ''}`}
+              />
+            ))}
           </div>
+        )}
+      </div>
+      
+      <div className="mobile-card-content">
+        <h3 className="mobile-card-title">{project.title}</h3>
+        <p className="mobile-card-subtitle">
+          {project.technologies.slice(0, 2).join(' • ')}
+        </p>
+        <button className="mobile-view-btn">
+          View Project
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Desktop Project Card Component
+const DesktopProjectCard = ({ project, onClick }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = project.images || [project.image];
+  const hasMultipleImages = images.length > 1;
+
+  useEffect(() => {
+    if (hasMultipleImages) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex(prev => (prev + 1) % images.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [hasMultipleImages, images.length]);
+
+  return (
+    <div className="desktop-project-card" onClick={onClick}>
+      <div className="desktop-card-image">
+        <img src={images[currentImageIndex]} alt={project.title} />
+        <div className="desktop-card-overlay">
+          <Eye size={24} />
         </div>
+        {hasMultipleImages && (
+          <div className="image-indicators">
+            {images.map((_, index) => (
+              <div
+                key={index}
+                className={`image-dot ${index === currentImageIndex ? 'active' : ''}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+      
+      <div className="desktop-card-content">
+        <h3 className="desktop-card-title">{project.title}</h3>
+        <div className="desktop-card-tech">
+          {project.technologies.slice(0, 3).map((tech, index) => (
+            <span key={index} className="tech-badge">{tech}</span>
+          ))}
+        </div>
+        <button className="desktop-view-btn">
+          View Project
+        </button>
       </div>
     </div>
   );
 };
 
 // Project Modal Component
-const ProjectModal = ({ project }) => {
+const ProjectModal = ({ project, onClose }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const images = project.images || [project.image];
+  const hasMultipleImages = images.length > 1;
+
+  useEffect(() => {
+    if (hasMultipleImages) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex(prev => (prev + 1) % images.length);
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [hasMultipleImages, images.length]);
+
   return (
-    <div className="project-modal">
-      <div className="modal-image">
-        <img src={project.image} alt={project.title} />
-      </div>
-      
-      <div className="modal-content">
-        <h2 className="modal-title">{project.title}</h2>
-        <p className="modal-description">{project.longDescription}</p>
+    <div className="project-modal-overlay" onClick={onClose}>
+      <div className="project-modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>
+          <X size={24} />
+        </button>
         
-        <div className="modal-tech-stack">
-          <h4>Technologies Used:</h4>
-          <div className="tech-grid">
-            {project.technologies.map((tech, index) => (
-              <span key={index} className="tech-item">{tech}</span>
-            ))}
+        <div className="modal-content">
+          <div className="modal-image">
+            <img src={images[currentImageIndex]} alt={project.title} />
+            {hasMultipleImages && (
+              <div className="modal-image-indicators">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`modal-image-dot ${index === currentImageIndex ? 'active' : ''}`}
+                    onClick={() => setCurrentImageIndex(index)}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-        
-        <div className="modal-actions">
-          <a 
-            href={project.liveLink}
-            className="btn btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ExternalLink size={18} />
-            View Live Project
-          </a>
-          <a 
-            href={project.githubLink}
-            className="btn btn-outline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github size={18} />
-            View Source Code
-          </a>
+          
+          <div className="modal-info">
+            <h2 className="modal-title">{project.title}</h2>
+            
+            {!showFullDescription ? (
+              <div className="modal-preview">
+                <p className="modal-description">
+                  {project.description}
+                </p>
+                <button 
+                  className="view-details-btn"
+                  onClick={() => setShowFullDescription(true)}
+                >
+                  View Details
+                </button>
+              </div>
+            ) : (
+              <div className="modal-full-description">
+                <p className="modal-long-description">
+                  {project.longDescription || project.description}
+                </p>
+                
+                <div className="modal-tech-stack">
+                  <h4>Technologies Used:</h4>
+                  <div className="modal-tech-grid">
+                    {project.technologies.map((tech, index) => (
+                      <span key={index} className="modal-tech-item">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="modal-actions">
+                  <a 
+                    href={project.liveLink}
+                    className="modal-btn primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink size={18} />
+                    Visit Project
+                  </a>
+                  <a 
+                    href={project.githubLink}
+                    className="modal-btn secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github size={18} />
+                    Source Code
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

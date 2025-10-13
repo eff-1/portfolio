@@ -14,7 +14,7 @@ import {
 import '../styles/Services.css';
 
 const Services = () => {
-  const [hoveredService, setHoveredService] = useState(null);
+
 
   const services = [
     {
@@ -31,7 +31,7 @@ const Services = () => {
       description: "Robust server-side applications with Node.js, PHP, and database integration. Building scalable APIs and secure backend systems.",
       icon: Server,
       features: ["Node.js/Express", "PHP Development", "API Design", "Database Management"],
-      color: "#3f37c9"
+      color: "#f72585"
     },
     {
       id: 3,
@@ -39,7 +39,7 @@ const Services = () => {
       description: "Complete web applications from conception to deployment. End-to-end development covering both frontend and backend requirements.",
       icon: Database,
       features: ["MERN/LAMP Stack", "Database Design", "Authentication", "Deployment"],
-      color: "#7209b7"
+      color: "#f72585"
     },
     {
       id: 4,
@@ -47,7 +47,7 @@ const Services = () => {
       description: "Cross-platform mobile applications using React Native. Creating native-like experiences for iOS and Android platforms.",
       icon: Smartphone,
       features: ["React Native", "Cross-platform", "Native Performance", "App Store Deployment"],
-      color: "#4cc9f0"
+      color: "#4361ee"
     },
     {
       id: 5,
@@ -55,7 +55,7 @@ const Services = () => {
       description: "Complete online store solutions with payment integration, inventory management, and admin dashboards for business growth.",
       icon: ShoppingCart,
       features: ["Shopping Cart", "Payment Gateway", "Admin Dashboard", "Order Management"],
-      color: "#f72585"
+      color: "#4cc9f0"
     },
     {
       id: 6,
@@ -63,7 +63,7 @@ const Services = () => {
       description: "User-centered design approach creating intuitive interfaces and exceptional user experiences that drive engagement.",
       icon: Palette,
       features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-      color: "#06ffa5"
+      color: "#4361ee"
     },
     {
       id: 7,
@@ -71,7 +71,7 @@ const Services = () => {
       description: "Cloud deployment, CI/CD pipelines, and infrastructure management for scalable and reliable applications.",
       icon: Cloud,
       features: ["AWS/Azure", "Docker", "CI/CD", "Monitoring"],
-      color: "#ff6b35"
+      color: "#f72585"
     },
     {
       id: 8,
@@ -79,15 +79,7 @@ const Services = () => {
       description: "Application security audits, performance optimization, and implementation of best practices for robust applications.",
       icon: Shield,
       features: ["Security Audit", "Performance Tuning", "Code Review", "Best Practices"],
-      color: "#9d4edd"
-    },
-    {
-      id: 9,
-      title: "SEO & Optimization",
-      description: "Search engine optimization, site speed improvements, and technical SEO to increase visibility and rankings.",
-      icon: Search,
-      features: ["Technical SEO", "Speed Optimization", "Analytics", "Search Rankings"],
-      color: "#f77f00"
+      color: "#4cc9f0"
     }
   ];
 
@@ -96,66 +88,62 @@ const Services = () => {
       <div className="container">
         {/* Desktop Layout */}
         <div className="desktop-services">
-          <div className="services-content">
-            <div className="services-header" data-aos="fade-right">
-              <h2 className="section-title">Services</h2>
-              <p className="section-subtitle">
-                Building digital experiences that drive results and transform businesses through innovative technology solutions.
-              </p>
-              <div className="services-stats">
-                <div className="stat-item">
-                  <span className="stat-number">50+</span>
-                  <span className="stat-label">Projects Completed</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">30+</span>
-                  <span className="stat-label">Happy Clients</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Client Satisfaction</span>
-                </div>
+          {/* Header at Top */}
+          <div className="services-header" data-aos="fade-up">
+            <h2 className="section-title">Services</h2>
+            <div className="title-underline"></div>
+            <p className="section-subtitle">
+              Building digital experiences that drive results and transform businesses through innovative technology solutions.
+            </p>
+            <div className="services-stats">
+              <div className="stat-item">
+                <span className="stat-number">50+</span>
+                <span className="stat-label">Projects Completed</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">30+</span>
+                <span className="stat-label">Happy Clients</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">100%</span>
+                <span className="stat-label">Client Satisfaction</span>
               </div>
             </div>
+          </div>
 
-            <div className="services-grid" data-aos="fade-left">
-              {services.map((service, index) => {
-                const IconComponent = service.icon;
-                return (
-                  <div
-                    key={service.id}
-                    className={`service-card ${hoveredService === service.id ? 'hovered' : ''}`}
-                    onMouseEnter={() => setHoveredService(service.id)}
-                    onMouseLeave={() => setHoveredService(null)}
-                    data-aos="zoom-in"
-                    data-aos-delay={index * 100}
-                    style={{ '--service-color': service.color }}
-                  >
-                    <div className="card-content">
-                      <div className="service-icon">
-                        <IconComponent size={32} />
-                        <div className="icon-bg"></div>
-                      </div>
-                      
-                      <div className="service-info">
-                        <h3 className="service-title">{service.title}</h3>
-                        <p className="service-description">{service.description}</p>
-                        
-                        <div className="service-features">
-                          {service.features.map((feature, idx) => (
-                            <span key={idx} className="feature-tag">
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+          {/* Full Width Services Grid */}
+          <div className="services-grid" data-aos="fade-up" data-aos-delay="200">
+            {services.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <div
+                  key={service.id}
+                  className="service-card"
+                  data-aos="zoom-in"
+                  data-aos-delay={index * 100}
+                  style={{ '--service-color': service.color }}
+                >
+                  <div className="card-content">
+                    <div className="service-icon">
+                      <IconComponent size={28} />
                     </div>
                     
-                    <div className="card-hover-effect"></div>
+                    <div className="service-info">
+                      <h3 className="service-title">{service.title}</h3>
+                      <p className="service-description">{service.description}</p>
+                      
+                      <div className="service-features">
+                        {service.features.map((feature, idx) => (
+                          <span key={idx} className="feature-tag">
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 

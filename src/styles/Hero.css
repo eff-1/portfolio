@@ -55,7 +55,6 @@
   bottom: 0;
   pointer-events: none;
   display: none;
-  /* Hide on mobile by default */
 }
 
 .floating-icon {
@@ -132,7 +131,6 @@
 .hero-right {
   order: 2;
   display: none;
-  /* Hidden on mobile */
 }
 
 /* Greeting */
@@ -145,11 +143,6 @@
   color: var(--gray-text);
   font-weight: 500;
   position: relative;
-}
-
-/* No emoji on mobile */
-.greeting-text::after {
-  display: none;
 }
 
 @keyframes wave {
@@ -170,18 +163,15 @@
 
 /* Name Styling */
 .hero-name {
-  /* Using a single clamp function for responsive scaling */
   font-size: clamp(2.5rem, 8vw, 6rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;
-  /* Adjusted for mobile */
   letter-spacing: -0.02em;
 }
 
 .name-part {
   display: inline-block;
-  /* Same line on mobile */
   margin-right: 0.5rem;
   margin-bottom: 0;
   animation: slideInUp 1s ease-out forwards;
@@ -208,16 +198,13 @@
 /* Dynamic Role */
 .hero-role {
   font-size: var(--font-size-lg);
-  /* Adjusted for mobile */
   margin-bottom: 1.5rem;
-  /* Adjusted for mobile */
   height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  /* Allow wrapping on small screens */
 }
 
 .role-label {
@@ -233,7 +220,6 @@
   font-weight: 700;
   position: relative;
   min-width: 200px;
-  /* Adjusted for mobile */
   text-align: left;
   animation: typewriter 3s infinite;
 }
@@ -282,7 +268,7 @@
   line-height: 1.6;
 }
 
-/* Mobile-only utility class */
+/* Mobile and tablet utility class */
 .mobile-only {
   display: block;
 }
@@ -291,20 +277,16 @@
 .hero-actions {
   display: flex;
   flex-direction: column;
-  /* Stacked on mobile */
   gap: 1rem;
-  /* Adjusted for mobile */
   justify-content: center;
   align-items: center;
   margin-bottom: 2.5rem;
-  /* Adjusted for mobile */
   flex-wrap: wrap;
 }
 
 .hero-cta,
 .hero-cta-secondary {
   padding: 1rem 1.5rem;
-  /* Adjusted for mobile */
   font-size: var(--font-size-base);
   font-weight: 600;
   border-radius: var(--radius-md);
@@ -312,8 +294,11 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  /* Full width on mobile */
   max-width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .hero-cta {
@@ -351,19 +336,6 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Hero Company */
-.hero-company {
-  font-size: var(--font-size-lg);
-  color: var(--gray-text);
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-
-.hero-company strong {
-  color: var(--accent-blue);
-  font-weight: 600;
-}
-
 /* Hero Philosophy (Right side) */
 .hero-philosophy {
   margin-bottom: 2rem;
@@ -383,12 +355,45 @@
   text-align: center;
 }
 
-.quote-mark {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  font-family: Georgia, serif;
-  font-weight: bold;
-  opacity: 0.8;
+.typing-text {
+  border-right: 2px solid var(--primary-color);
+  animation:
+    typing 5s steps(120, end) 1s both,
+    blink-caret 0.75s step-end infinite 1s,
+    remove-caret 0.1s ease-in-out 6s both;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  max-width: 100%;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+
+  0%,
+  50% {
+    border-color: var(--primary-color);
+  }
+
+  51%,
+  100% {
+    border-color: transparent;
+  }
+}
+
+@keyframes remove-caret {
+  to {
+    border-right: none;
+  }
 }
 
 /* Hero Stats */
@@ -403,11 +408,6 @@
 .stat-item {
   text-align: center;
   position: relative;
-}
-
-.stat-item::after {
-  display: none;
-  /* Hide on mobile */
 }
 
 .stat-number {
@@ -438,11 +438,11 @@
   align-items: center;
   gap: 0.5rem;
   position: absolute;
-  bottom: 1rem;
-  /* Adjusted for mobile */
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   animation: bounce 2s infinite;
+  z-index: 20;
 }
 
 @keyframes bounce {
@@ -494,10 +494,7 @@
   font-weight: 500;
 }
 
-/*
- * Media Queries for Tablet and Desktop (min-width approach)
- * These styles will override the mobile styles on larger screens.
- */
+/* Tablet Styles */
 @media (min-width: 480px) {
   .hero-name {
     margin-bottom: 1.5rem;
@@ -537,16 +534,6 @@
     min-height: 90vh;
   }
 
-  /* Hide mobile-only content on desktop */
-  .mobile-only {
-    display: none;
-  }
-
-  /* No emoji on desktop either */
-  .greeting-text::after {
-    display: none;
-  }
-
   .hero-actions {
     flex-direction: row;
     gap: 1.5rem;
@@ -570,10 +557,10 @@
 
   .floating-elements {
     display: block;
-    /* Show floating elements on larger screens */
   }
 }
 
+/* DESKTOP - Side by Side Layout */
 @media (min-width: 992px) {
   .hero-section {
     padding: 120px 0 80px;
@@ -585,41 +572,163 @@
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     text-align: left;
+    align-items: stretch;
+    min-height: 70vh;
   }
 
   .hero-left {
     order: 1;
+    padding-right: 3rem;
+    padding-top: 0;
+    align-self: flex-start;
   }
 
   .hero-right {
     display: block;
     order: 2;
+    align-self: flex-end;
+    padding-left: 2rem;
+    padding-right: 2rem;
     padding-top: 4rem;
-    align-self: end;
+    text-align: center;
   }
 
+  /* LEFT SIDE STYLING */
   .hero-name {
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .name-part {
+    display: inline;
+    margin-right: 0.8rem;
   }
 
   .hero-role {
     font-size: var(--font-size-2xl);
     justify-content: flex-start;
+    margin-bottom: 1.5rem;
+    height: auto;
   }
 
   .role-text {
-    min-width: 280px;
+    min-width: auto;
     text-align: left;
+  }
+
+  .hero-company {
+    font-size: var(--font-size-xl);
+    margin-bottom: 3rem;
+    line-height: 1.4;
   }
 
   .hero-actions {
     justify-content: flex-start;
-  }
-
-  .hero-stats {
-    justify-content: flex-start;
+    flex-direction: row;
+    gap: 1.5rem;
     margin-bottom: 0;
   }
+
+  /* RIGHT SIDE STYLING */
+  .hero-philosophy {
+    text-align: center;
+    margin: 0 auto 3rem;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  .hero-philosophy p {
+    text-align: center;
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  .typing-lines {
+    text-align: center;
+  }
+
+  .typing-line {
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0;
+    opacity: 1;
+    width: 100%;
+  }
+
+  .line-1 {
+    animation:
+      type-line 2s steps(60, end) 1s both,
+      show-line 0.1s 1s both;
+  }
+
+  .line-2 {
+    animation:
+      type-line 2s steps(50, end) 3.5s both,
+      show-line 0.1s 3.5s both;
+  }
+
+  .line-3 {
+    animation:
+      type-line 2s steps(40, end) 6s both,
+      show-line 0.1s 6s both,
+      add-cursor 0.1s 6s both,
+      blink-caret 1s step-end infinite 6s,
+      remove-caret 0.1s 8s both;
+  }
+
+  remove-caret 0.1s ease-in-out 5s both;
+  display: block;
+}
+
+.hero-stats {
+  justify-content: center;
+  margin: 2rem auto 0;
+  gap: 3rem;
+  flex-wrap: nowrap;
+}
+
+.stat-item {
+  flex-shrink: 0;
+}
+
+.mobile-only {
+  display: none;
+}
+}
+
+@keyframes show-line {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes type-line {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes add-cursor {
+  to {
+    border-right: 2px solid var(--primary-color);
+  }
+}
+
+@keyframes desktop-typing {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
 }
 
 /* High contrast mode support */
@@ -662,10 +771,6 @@
   }
 
   .role-text {
-    animation: none;
-  }
-
-  .greeting-text::after {
     animation: none;
   }
 
