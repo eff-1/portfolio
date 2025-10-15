@@ -9,6 +9,7 @@ const Portfolio = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showAllTechs, setShowAllTechs] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const mobileSliderRef = useRef(null);
 
   // All available technologies from projects
@@ -131,8 +132,11 @@ const Portfolio = () => {
                   key={project.id}
                   project={project}
                   onClick={() => {
+                    const scrollY = window.scrollY;
+                    setScrollPosition(scrollY);
                     setSelectedProject(project);
-                    document.body.style.overflow = 'hidden';
+                    document.body.classList.add('modal-open');
+                    document.body.style.top = `-${scrollY}px`;
                   }}
                   isActive={index === currentSlide}
                 />
@@ -219,8 +223,11 @@ const Portfolio = () => {
                                 key={project.id}
                                 project={project}
                                 onClick={() => {
+                                  const scrollY = window.scrollY;
+                                  setScrollPosition(scrollY);
                                   setSelectedProject(project);
-                                  document.body.style.overflow = 'hidden';
+                                  document.body.classList.add('modal-open');
+                                  document.body.style.top = `-${scrollY}px`;
                                 }}
                               />
                             ))}
@@ -287,7 +294,9 @@ const Portfolio = () => {
           project={selectedProject} 
           onClose={() => {
             setSelectedProject(null);
-            document.body.style.overflow = 'unset';
+            document.body.classList.remove('modal-open');
+            document.body.style.top = '';
+            window.scrollTo(0, scrollPosition);
           }} 
         />
       )}
@@ -334,6 +343,9 @@ const MobileProjectCard = ({ project, onClick, isActive }) => {
       
       <div className="mobile-card-content">
         <h3 className="mobile-card-title">{project.title}</h3>
+        <p className="mobile-card-description">
+          {project.description}
+        </p>
         <p className="mobile-card-subtitle">
           {project.technologies.slice(0, 2).join(' • ')}
         </p>
@@ -381,6 +393,9 @@ const DesktopProjectCard = ({ project, onClick }) => {
       
       <div className="desktop-card-content">
         <h3 className="desktop-card-title">{project.title}</h3>
+        <p className="desktop-card-description">
+          {project.description}
+        </p>
         <div className="desktop-card-tech">
           {project.technologies.slice(0, 3).map((tech, index) => (
             <span key={index} className="tech-badge">{tech}</span>
@@ -406,6 +421,20 @@ const ProjectModal = ({ project, onClose }) => {
     setShowFullDescription(false);
     setCurrentImageIndex(0);
   }, [project.id]);
+
+  // Prevent background scroll and add keyboard support
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
 
   useEffect(() => {
     if (hasMultipleImages) {
@@ -447,12 +476,23 @@ const ProjectModal = ({ project, onClose }) => {
                 <p className="modal-description">
                   {project.description}
                 </p>
-                <button 
-                  className="view-details-btn"
-                  onClick={() => setShowFullDescription(true)}
-                >
-                  View Details
-                </button>
+                <div className="modal-preview-actions">
+                  <button 
+                    className="view-details-btn"
+                    onClick={() => setShowFullDescription(true)}
+                  >
+                    View Details
+                  </button>
+                  <a 
+                    href={project.liveLink}
+                    className="modal-btn primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink size={16} />
+                    Visit Project
+                  </a>
+                </div>
               </div>
             ) : (
               <div className="modal-full-description">
