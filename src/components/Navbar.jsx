@@ -93,6 +93,14 @@ const Navbar = () => {
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
+          {/* Mobile Navigation Backdrop */}
+          {isOpen && (
+            <div 
+              className="mobile-backdrop"
+              onClick={() => setIsOpen(false)}
+            />
+          )}
+
           {/* Mobile Navigation */}
           <div className={`mobile-nav ${isOpen ? 'open' : ''}`}>
             <div className="mobile-nav-content">
@@ -114,8 +122,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Overlay */}
-      {isOpen && <div className="mobile-overlay" onClick={() => setIsOpen(false)} />}
+
     </nav>
   );
 };

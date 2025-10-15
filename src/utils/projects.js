@@ -111,6 +111,111 @@ The project addresses the problem of unstructured exam preparation and limited a
     liveLink: "#",
     githubLink: "#",
     featured: false
+  },
+  {
+    id: 7,
+    title: "E-Commerce Store",
+    description: "Modern online shopping platform with payment integration",
+    longDescription: `A comprehensive e-commerce solution built with modern web technologies, featuring a sleek user interface and robust backend functionality.
+
+**Key Features:**
+- Product catalog with advanced filtering and search
+- Shopping cart and wishlist functionality
+- Secure payment processing with Stripe integration
+- User authentication and profile management
+- Order tracking and history
+- Admin dashboard for inventory management
+- Responsive design for all devices
+- SEO optimized product pages
+
+**Technical Implementation:**
+- Built with React and Next.js for optimal performance
+- Node.js backend with Express framework
+- MongoDB database for scalable data storage
+- JWT authentication for secure user sessions
+- Cloudinary integration for image management
+- Email notifications for order updates
+
+This project demonstrates full-stack development skills, payment gateway integration, and modern e-commerce best practices.`,
+    images: [
+      "/assets/projects/hero-back.jpg"
+    ],
+    category: "fullstack",
+    technologies: ["React", "Next.js", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
+    liveLink: "#",
+    githubLink: "#",
+    featured: false
+  },
+  {
+    id: 8,
+    title: "Weather Dashboard",
+    description: "Interactive weather application with forecasting",
+    longDescription: `A beautiful and intuitive weather dashboard that provides real-time weather information and forecasts for locations worldwide.
+
+**Core Features:**
+- Current weather conditions with detailed metrics
+- 7-day weather forecast with hourly breakdowns
+- Interactive weather maps with radar and satellite imagery
+- Location-based weather alerts and notifications
+- Weather history and trends analysis
+- Customizable dashboard with favorite locations
+- Dark/light theme support
+- Offline functionality with cached data
+
+**Technical Highlights:**
+- Built with React and TypeScript for type safety
+- Integration with OpenWeatherMap API
+- Geolocation services for automatic location detection
+- Progressive Web App (PWA) capabilities
+- Chart.js for weather data visualization
+- Local storage for user preferences
+- Responsive design with CSS Grid and Flexbox
+
+Perfect example of API integration, data visualization, and modern frontend development practices.`,
+    images: [
+      "/assets/projects/hero-back.jpg"
+    ],
+    category: "frontend",
+    technologies: ["React", "TypeScript", "Chart.js", "PWA", "CSS Grid", "OpenWeather API"],
+    liveLink: "#",
+    githubLink: "#",
+    featured: false
+  },
+  {
+    id: 9,
+    title: "Social Media Analytics",
+    description: "Comprehensive social media monitoring and analytics platform",
+    longDescription: `An advanced analytics platform that helps businesses track, analyze, and optimize their social media presence across multiple platforms.
+
+**Platform Features:**
+- Multi-platform social media monitoring (Twitter, Instagram, Facebook, LinkedIn)
+- Real-time engagement tracking and sentiment analysis
+- Competitor analysis and benchmarking tools
+- Automated reporting with customizable dashboards
+- Content performance analytics and optimization suggestions
+- Influencer identification and outreach management
+- Social listening for brand mentions and trends
+- ROI tracking for social media campaigns
+
+**Technical Architecture:**
+- Microservices architecture with Docker containers
+- React frontend with Redux for state management
+- Node.js backend with Express and GraphQL
+- PostgreSQL database with Redis caching
+- Machine learning models for sentiment analysis
+- Real-time data processing with WebSockets
+- Automated data collection with scheduled jobs
+- RESTful APIs for third-party integrations
+
+This project showcases advanced full-stack development, data analytics, machine learning integration, and scalable system architecture.`,
+    images: [
+      "/assets/projects/hero-back.jpg"
+    ],
+    category: "fullstack",
+    technologies: ["React", "Node.js", "GraphQL", "PostgreSQL", "Redis", "Docker", "Machine Learning"],
+    liveLink: "#",
+    githubLink: "#",
+    featured: false
   }
 ];
 
