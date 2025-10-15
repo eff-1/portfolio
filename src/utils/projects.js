@@ -56,7 +56,62 @@ The project addresses the problem of unstructured exam preparation and limited a
     githubLink: "https://github.com/haftech/chatify",
     featured: true
   },
-
+  {
+    id: 3,
+    title: "Real Estate Platform",
+    description: "Modern property listing and management system",
+    longDescription: "Complete real estate platform with property listings, virtual tours, agent profiles, and advanced search functionality built with Next.js.",
+    images: [
+      "/assets/projects/hero-back.jpg"
+    ],
+    category: "frontend",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Prisma"],
+    liveLink: "#",
+    githubLink: "#",
+    featured: false
+  },
+  {
+    id: 4,
+    title: "CRM System",
+    description: "Customer relationship management solution",
+    longDescription: "Comprehensive CRM system for managing customer relationships, sales pipeline, and team collaboration with advanced reporting features.",
+    images: [
+      "/assets/projects/hero-back.jpg"
+    ],
+    category: "fullstack",
+    technologies: ["React", "PHP", "MySQL", "Bootstrap"],
+    liveLink: "#",
+    githubLink: "#",
+    featured: false
+  },
+  {
+    id: 5,
+    title: "Task Management App",
+    description: "Collaborative project management platform",
+    longDescription: "Feature-rich task management application with team collaboration, time tracking, project templates, and productivity analytics.",
+    images: [
+      "/assets/projects/hero-back.jpg"
+    ],
+    category: "frontend",
+    technologies: ["React", "Redux", "Firebase", "Material-UI"],
+    liveLink: "#",
+    githubLink: "#",
+    featured: false
+  },
+  {
+    id: 6,
+    title: "Restaurant POS",
+    description: "Point-of-sale system for restaurants",
+    longDescription: "Complete restaurant management system with order processing, inventory tracking, staff management, and detailed analytics dashboard.",
+    images: [
+      "/assets/projects/hero-back.jpg"
+    ],
+    category: "backend",
+    technologies: ["Node.js", "Express", "PostgreSQL", "Vue.js"],
+    liveLink: "#",
+    githubLink: "#",
+    featured: false
+  }
 ];
 
 // Filter categories for portfolio

@@ -130,7 +130,10 @@ const Portfolio = () => {
                 <MobileProjectCard
                   key={project.id}
                   project={project}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => {
+                    setSelectedProject(project);
+                    document.body.style.overflow = 'hidden';
+                  }}
                   isActive={index === currentSlide}
                 />
               ))}
@@ -215,7 +218,10 @@ const Portfolio = () => {
                               <DesktopProjectCard
                                 key={project.id}
                                 project={project}
-                                onClick={() => setSelectedProject(project)}
+                                onClick={() => {
+                                  setSelectedProject(project);
+                                  document.body.style.overflow = 'hidden';
+                                }}
                               />
                             ))}
                         </div>
@@ -279,7 +285,10 @@ const Portfolio = () => {
       {selectedProject && (
         <ProjectModal 
           project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
+          onClose={() => {
+            setSelectedProject(null);
+            document.body.style.overflow = 'unset';
+          }} 
         />
       )}
     </section>
@@ -391,6 +400,12 @@ const ProjectModal = ({ project, onClose }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const images = project.images || [project.image];
   const hasMultipleImages = images.length > 1;
+
+  // Reset state when project changes
+  useEffect(() => {
+    setShowFullDescription(false);
+    setCurrentImageIndex(0);
+  }, [project.id]);
 
   useEffect(() => {
     if (hasMultipleImages) {
