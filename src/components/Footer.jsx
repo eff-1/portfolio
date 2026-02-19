@@ -27,7 +27,11 @@ const Footer = () => {
         {/* Footer Content */}
         <div className="footer-content">
           <div className="footer-brand">
-            <h3 className="footer-logo">HafTech</h3>
+            <img 
+              src="/assets/projects/haftech_logo.png" 
+              alt="HafTech Logo" 
+              className="footer-logo-image"
+            />
             <p className="footer-tagline">
               Building the future, one line of code at a time
             </p>

@@ -221,28 +221,24 @@
   position: relative;
   min-width: 200px;
   text-align: left;
-  animation: typewriter 3s infinite;
+  animation: smoothFade 3s ease-in-out infinite;
 }
 
-@keyframes typewriter {
+@keyframes smoothFade {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
   }
 
   10% {
     opacity: 1;
-    transform: translateX(0);
   }
 
   90% {
     opacity: 1;
-    transform: translateX(0);
   }
 
   100% {
     opacity: 0;
-    transform: translateX(20px);
   }
 }
 
@@ -257,6 +253,15 @@
 .hero-company strong {
   color: var(--accent-blue);
   font-weight: 700;
+}
+
+/* Tagline */
+.hero-tagline {
+  font-size: var(--font-size-lg);
+  color: var(--gray-text);
+  margin: 1rem 0 2rem;
+  font-weight: 400;
+  font-style: italic;
 }
 
 /* Description */
@@ -348,7 +353,7 @@
 
 .hero-philosophy p {
   font-size: var(--font-size-base);
-  color: var(--light-text);
+  color: var(--text-primary);
   line-height: 1.7;
   margin: 0;
   font-style: italic;
@@ -356,7 +361,7 @@
 }
 
 .typing-text {
-  border-right: 2px solid var(--primary-color);
+  border-right: 2px solid var(--accent-teal);
   animation:
     typing 5s steps(120, end) 1s both,
     blink-caret 0.75s step-end infinite 1s,
@@ -381,7 +386,7 @@
 
   0%,
   50% {
-    border-color: var(--primary-color);
+    border-color: var(--accent-teal);
   }
 
   51%,
@@ -630,6 +635,29 @@
     margin-bottom: 0;
   }
 
+  /* Scroll indicator - slightly left of center on desktop */
+  .scroll-indicator {
+    left:43%;
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+
+    40% {
+      transform: translateY(-10px);
+    }
+
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
   /* RIGHT SIDE STYLING */
   .hero-philosophy {
     text-align: center;
@@ -638,7 +666,7 @@
     width: 100%;
   }
 
-  .hero-philosophy p {
+  .philosophy-text {
     text-align: center;
     font-size: var(--font-size-lg);
     line-height: 1.8;
@@ -653,7 +681,7 @@
     white-space: nowrap;
     overflow: hidden;
     margin: 0;
-    opacity: 1;
+    opacity: 0;
     width: 100%;
   }
 
@@ -677,10 +705,6 @@
       blink-caret 1s step-end infinite 6s,
       remove-caret 0.1s 8s both;
   }
-
-  remove-caret 0.1s ease-in-out 5s both;
-  display: block;
-}
 
 .hero-stats {
   justify-content: center;
@@ -729,7 +753,7 @@
     width: 100%;
   }
 }
-}
+
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {

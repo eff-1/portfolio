@@ -12,7 +12,7 @@ const Hero = () => {
     "UI/UX & Software Engineer",
     "Full Stack Developer",
     "Digital Innovation Leader",
-    "CEO & Founder of HafTech"
+    "Founder @ HafTech"
   ];
 
   useEffect(() => {
@@ -74,35 +74,28 @@ const Hero = () => {
             {/* Name */}
             <h1 className="hero-name" data-aos="fade-right" data-aos-delay="400">
               <span className="name-part">Ariyo</span>
-              <span className="name-part gradient-text">Faruq</span>
+              <span className="name-part">Faruq</span>
             </h1>
 
             {/* Dynamic Role */}
             <div className="hero-role" data-aos="fade-right" data-aos-delay="600">
-              <span className="role-label">A </span>
               <span className="role-text">
                 {roles[currentRole]}
               </span>
             </div>
 
-            {/* Company */}
-            <p className="hero-company" data-aos="fade-right" data-aos-delay="800">
-              CEO & Founder of <strong>HafTech</strong>.
-            </p>
-
-            {/* Description - Mobile Only */}
-            <p className="hero-description mobile-only" data-aos="fade-right" data-aos-delay="900">
-              Building innovative web solutions and leading digital transformation
-              with cutting-edge technologies.
+            {/* Tagline */}
+            <p className="hero-tagline" data-aos="fade-right" data-aos-delay="700">
+              Transforming ideas into digital reality
             </p>
 
             {/* CTA Buttons */}
-            <div className="hero-actions" data-aos="fade-right" data-aos-delay="1000">
+            <div className="hero-actions" data-aos="fade-right" data-aos-delay="800">
               <button
-                className="btn btn-primary hero-cta"
+                className="btn btn-gradient hero-cta"
                 onClick={scrollToPortfolio}
               >
-                <span>View My Work</span>
+                <span>View Projects</span>
                 <Rocket size={18} />
               </button>
 
@@ -128,16 +121,13 @@ const Hero = () => {
           </div>
 
           {/* Right Content */}
-          <div className="hero-right" data-aos="fade-left" data-aos-delay="1200">
+          <div className="hero-right" data-aos="fade-left" data-aos-delay="1000">
             <div className="hero-philosophy">
               <div className="typing-lines">
                 <p className="typing-line line-1">I believe technology should inspire and empower people to achieve more.</p>
                 <p className="typing-line line-2">At HafTech, I craft intuitive, powerful products where</p>
                 <p className="typing-line line-3">creativity meets engineering excellence.</p>
               </div>
-              <p className="mobile-only" style={{marginTop: '1.5rem', opacity: 0.9}}>
-                Building cutting-edge solutions that make a difference in the digital world.
-              </p>
             </div>
 
             {/* Stats */}

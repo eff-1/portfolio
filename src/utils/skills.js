@@ -27,7 +27,15 @@ export const skillsData = {
       { name: "Python", level: 85, icon: "Terminal" },
       { name: "PHP", level: 83, icon: "Code" },
       { name: "MySQL", level: 85, icon: "Database" },
-      { name: "GraphQL", level: 75, icon: "Code2" }
+      { name: "GraphQL", level: 75, icon: "Code2" },
+      { name: "WebSockets", level: 80, icon: "Zap" },
+      { name: "JWT Auth", level: 88, icon: "Server" },
+      { name: "Ethers.js", level: 70, icon: "Code" },
+      { name: "IPFS Basics", level: 65, icon: "Cloud" },
+      { name: "NFT Metadata", level: 68, icon: "FileCode" },
+      { name: "Redis", level: 75, icon: "Database" },
+      { name: "REST APIs", level: 92, icon: "Globe" },
+      { name: "Microservices", level: 78, icon: "Server" }
     ]
   },
   tools: {
@@ -74,11 +82,11 @@ export const getTopSkills = () => {
 
 // Skills for about section (main highlights)
 export const mainSkills = [
-  { name: "React / Next.js", level: 95 },
-  { name: "Node.js / Express", level: 90 },
-  { name: "TypeScript / JavaScript / Python", level: 85 },
-  { name: "PostgreSQL / MongoDB / Firebase", level: 82 },
-  { name: "AWS / Docker", level: 80 },
-  { name: "UI/UX Implementation", level: 88 },
-  { name: "Scalable Architecture Design", level: 83 }
+  { name: "React / Next.js", level: 98 },
+  { name: "Node.js / Express", level: 95 },
+  { name: "TypeScript / JavaScript / Python", level: 92 },
+  { name: "PostgreSQL / MongoDB / Firebase", level: 90 },
+  { name: "AWS / Docker", level: 88 },
+  { name: "UI/UX Implementation", level: 94 },
+  { name: "Scalable Architecture Design", level: 91 }
 ];

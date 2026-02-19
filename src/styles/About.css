@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.about-section .section-title {
+  color: white !important;
+}
+
 .about-section::before {
   content: '';
   position: absolute;
@@ -34,6 +38,12 @@
 /* Image Section */
 .about-image {
   position: relative;
+}
+
+.download-cv-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  justify-content: center;
 }
 
 .image-container {
@@ -381,9 +391,6 @@
   color: var(--skill-color, var(--primary-color));
   font-weight: 700;
   margin-top: 0.75rem;
-}
-  border-radius: 3px;
-  transition: width 1s ease-out;
 }
 
 .level-text {

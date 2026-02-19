@@ -53,167 +53,321 @@ The project addresses the problem of unstructured exam preparation and limited a
     category: "fullstack",
     technologies: ["React", "Node.js", "Socket.io", "Supabase", "Express", "PostgreSQL"],
     liveLink: "https://chatiify-mauve.vercel.app/",
-    githubLink: "https://github.com/haftech/chatify",
+    githubLink: "https://github.com/eff-1/chatox",
     featured: true
   },
   {
     id: 3,
-    title: "Real Estate Platform",
-    description: "Modern property listing and management system",
-    longDescription: "Complete real estate platform with property listings, virtual tours, agent profiles, and advanced search functionality built with Next.js.",
+    title: "Terraaqua Environmental",
+    description: "Corporate website for environmental consultancy and industrial services",
+    longDescription: `Terraaqua.com.ng is a comprehensive corporate website for Terra Aqua Environmental Consultancy Limited, showcasing their business divisions and environmental services across Nigeria.
+
+**Business Divisions:**
+- Environmental Consultancy Services
+- Terra Alloy (Metal Recycling Plant)
+- Tyre Pyrolysis Plant
+- Terra Shop (Commercial retail segment for industrial products)
+
+**Core Services:**
+- Environmental impact assessments and studies
+- Environmental engineering solutions
+- Industrial and commercial cleaning services
+- Professional pest control management
+- Safety, Health & Environmental Management (SHE)
+- Manpower training and executive development programs
+
+**Technical Implementation:**
+- Built with WordPress CMS for flexible content management
+- Responsive design using modern Flexbox layout
+- Custom theme development with SCSS preprocessing
+- Interactive modal system for enhanced user engagement
+- Optimized SVG inline icons for fast loading
+- PHP backend with MySQL database
+- Mobile-first approach for all device sizes
+- SEO optimization for search visibility
+
+**Site Structure:**
+The website organizes content around the company's business divisions, providing detailed information about each service line, completed projects, and available products. Terra Shop serves as the integrated e-commerce segment, offering industrial and commercial products including cleaning materials, safety equipment, and environmental supplies.
+
+**Business Impact:**
+The platform successfully establishes Terra Aqua's digital presence, enabling clients to explore services, request consultations, and purchase products online, while showcasing the company's expertise in environmental management and industrial solutions.`,
     images: [
-      "/assets/projects/hero-back.jpg"
+      "/assets/projects/terraaqua.jpeg"
     ],
-    category: "frontend",
-    technologies: ["Next.js", "TypeScript", "Tailwind", "Prisma"],
-    liveLink: "#",
+    category: "fullstack",
+    technologies: ["WordPress", "PHP", "MySQL", "SCSS", "JavaScript", "jQuery", "HTML5", "CSS3"],
+    liveLink: "https://terraaqua.com.ng/",
     githubLink: "#",
     featured: false
   },
   {
     id: 4,
-    title: "CRM System",
-    description: "Customer relationship management solution",
-    longDescription: "Comprehensive CRM system for managing customer relationships, sales pipeline, and team collaboration with advanced reporting features.",
+    title: "Jimmarof Marketplace",
+    description: "Multi-vendor e-commerce platform for automotive and general products",
+    longDescription: `Jimmarof is a comprehensive online e-commerce marketplace offering a wide range of products across multiple categories. Positioned as Nigeria's "ultimate online auto hub," the platform extends beyond automotive to serve as a full-featured marketplace supporting diverse product categories and multiple vendors.
+
+**Product Categories:**
+- Automotive parts and accessories
+- Electronics and gadgets
+- Fashion and apparel
+- Home goods and furniture
+- Pet supplies and accessories
+- Beauty and personal care products
+- Sports and outdoor equipment
+- Tools and hardware
+
+**Platform Features:**
+- Multi-vendor system enabling third-party sellers to register and manage stores
+- Advanced product search and filtering across all categories
+- Detailed product pages with specifications, images, and pricing
+- Shopping cart with saved items and wishlist functionality
+- Comprehensive user account management for buyers and sellers
+- Order tracking and purchase history
+- Seller dashboard for inventory and sales management
+- Review and rating system for products and sellers
+- Secure checkout process with multiple payment options
+
+**Technical Stack:**
+- Custom PHP-based backend architecture
+- MySQL database for scalable product and user data management
+- Bootstrap framework for responsive, mobile-friendly design
+- Payment integration with Nigerian gateways (Paystack, Flutterwave)
+- RESTful API structure for vendor operations
+- Secure authentication and authorization system
+- Session management for cart persistence
+- Image optimization for fast loading
+
+**Business Impact:**
+The platform successfully bridges the gap between automotive specialty retail and general marketplace commerce, providing a unified shopping experience for Nigerian consumers while empowering local vendors and small businesses to reach a wider audience online. The multi-vendor model creates a thriving ecosystem for both buyers and sellers.`,
     images: [
-      "/assets/projects/hero-back.jpg"
+      "/assets/projects/jimarouf.jpeg"
     ],
     category: "fullstack",
-    technologies: ["React", "PHP", "MySQL", "Bootstrap"],
-    liveLink: "#",
+    technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript", "Paystack", "HTML5", "CSS3", "REST API"],
+    liveLink: "https://jimmarof.com/",
     githubLink: "#",
     featured: false
   },
   {
     id: 5,
-    title: "Task Management App",
-    description: "Collaborative project management platform",
-    longDescription: "Feature-rich task management application with team collaboration, time tracking, project templates, and productivity analytics.",
+    title: "Raws Apparel",
+    description: "Full-stack fashion platform with Firebase and Pinterest API integration",
+    longDescription: `Raws Apparel is a modern full-stack web application built for a tailoring brand to showcase designs, organize collections, and streamline customer inquiries. The platform moves beyond social-media-only selling to create a structured, searchable, and professional digital presence.
+
+**Key Features:**
+- Unified search combining Firebase database with Pinterest API integration
+- Admin dashboard for uploading, editing, and featuring designs
+- Dynamic style categories: gowns, suits, agbada, casual wear
+- "Get This Style" button generating prefilled WhatsApp messages
+- Cloudinary CDN for optimized image storage and delivery
+- Premium "Ebony Gold" design system
+- Fully responsive UI across all devices
+
+**Technical Architecture:**
+- Frontend: Vue 3 + Tailwind CSS (built with Vite)
+- Backend: Node.js + Express (deployed on Render)
+- Database: Firebase Firestore for real-time data
+- Image Hosting: Cloudinary for optimized delivery
+- API Integration: Pinterest API for design inspiration
+- Hosting: Netlify for frontend deployment
+
+**Business Impact:**
+The platform intelligently merges admin-uploaded designs with external inspiration from Pinterest, creating a unified gallery experience. Each design includes WhatsApp integration that reduces friction between discovery and customer engagement, directly supporting real business workflow.
+
+**What This Demonstrates:**
+- Full-stack architecture design
+- Multiple API integration and data merging
+- Cloud deployment and environment configuration
+- Clean UI system design with custom theming
+- Real-world business problem solving
+- Modern framework implementation (Vue 3)
+
+Raws Apparel highlights the ability to build scalable, production-ready systems using modern frameworks and free-tier cloud infrastructure while solving actual business challenges.`,
     images: [
-      "/assets/projects/hero-back.jpg"
+      "/assets/projects/rawsapparel.jpeg"
     ],
-    category: "frontend",
-    technologies: ["React", "Redux", "Firebase", "Material-UI"],
-    liveLink: "#",
-    githubLink: "#",
-    featured: false
+    category: "fullstack",
+    technologies: ["Vue.js", "Node.js", "Firebase", "Tailwind CSS", "Express", "Cloudinary", "Pinterest API"],
+    liveLink: "https://rawsapparel.vercel.app/",
+    githubLink: "https://github.com/eff-1/rawsapparel",
+    featured: true,
+    ongoing: true
   },
   {
     id: 6,
-    title: "Restaurant POS",
-    description: "Point-of-sale system for restaurants",
-    longDescription: "Complete restaurant management system with order processing, inventory tracking, staff management, and detailed analytics dashboard.",
+    title: "Blessing Poultries NG",
+    description: "Poultry farm website with e-commerce and WhatsApp ordering",
+    longDescription: `Blessing Poultries NG is a modern full-stack website and e-commerce platform for a poultry farm, combining a professional farm profile with a seamless online ordering experience. Customers can browse products and order directly via WhatsApp.
+
+**Core Features:**
+- Responsive UI: Clean, mobile-friendly design using React and Tailwind CSS
+- Product Catalog: Live birds, eggs, processed chicken, and poultry feed
+- WhatsApp Ordering: Instant order placement via WhatsApp integration
+- Cart & Checkout: Add products, review orders, and confirm via WhatsApp
+- Payment Integration: Secure payment options and instant messaging
+- User Management: Registration and login with JWT authentication
+- Admin Dashboard: Inventory management, product updates, order tracking
+- Scalable Backend: Node.js and Express with MongoDB
+
+**Product Categories:**
+- Live birds (broilers, layers, cockerels)
+- Fresh eggs (crates and trays)
+- Processed chicken (whole, parts, frozen)
+- Poultry feed and supplements
+- Farm equipment and supplies
+
+**Technical Implementation:**
+- Frontend: React with Tailwind CSS for modern, responsive design
+- Backend: Node.js + Express REST API
+- Database: MongoDB for flexible data storage
+- Authentication: JWT-based secure user sessions
+- Payment: Integration with Nigerian payment gateways
+- Messaging: WhatsApp Business API integration
+- Hosting: Cloud deployment for reliability
+
+**Business Value:**
+This platform effectively digitizes Blessing Poultries NG, making farm operations and customer sales seamless. It combines a professional farm showcase with an intuitive e-commerce workflow, using WhatsApp as a core channel to drive orders and customer engagement. The system reduces manual order processing while expanding the farm's reach beyond local customers.`,
     images: [
-      "/assets/projects/hero-back.jpg"
+      "/assets/projects/bls-poulrty.jpeg"
     ],
-    category: "backend",
-    technologies: ["Node.js", "Express", "PostgreSQL", "Vue.js"],
-    liveLink: "#",
-    githubLink: "#",
+    category: "fullstack",
+    technologies: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "JWT", "WhatsApp API"],
+    liveLink: "https://blessing-poultry.vercel.app/",
+    githubLink: "https://github.com/eff-1/Blessing-Poultry",
     featured: false
   },
   {
     id: 7,
-    title: "E-Commerce Store",
-    description: "Modern online shopping platform with payment integration",
-    longDescription: `A comprehensive e-commerce solution built with modern web technologies, featuring a sleek user interface and robust backend functionality.
+    title: "BUILDRIFT",
+    description: "Verifiable builder reputation platform for Web3 events",
+    longDescription: `BUILDRIFT transforms Web3 events into verifiable builder impact. The platform enables organizers to define actions for participants, verify their contributions, and generate reputation scores. Builders receive public profiles showcasing verified contributions and event history, providing a reliable way to demonstrate skills and activity in the Web3 ecosystem.
 
-**Key Features:**
-- Product catalog with advanced filtering and search
-- Shopping cart and wishlist functionality
-- Secure payment processing with Stripe integration
-- User authentication and profile management
-- Order tracking and history
-- Admin dashboard for inventory management
-- Responsive design for all devices
-- SEO optimized product pages
+**Core Features:**
+- Wallet-based authentication using SIWE (Sign-In with Ethereum)
+- Event creation and action management system
+- Verified builder workflows with on-chain validation
+- Real-time impact scoring and reputation tracking
+- Public builder profiles with contribution history
+- Clean, professional, minimal UI design
+- IPFS integration for decentralized metadata storage
 
-**Technical Implementation:**
-- Built with React and Next.js for optimal performance
-- Node.js backend with Express framework
-- MongoDB database for scalable data storage
-- JWT authentication for secure user sessions
-- Cloudinary integration for image management
-- Email notifications for order updates
+**Technical Architecture:**
+- Frontend: Next.js (App Router) with React and TypeScript
+- Styling: Tailwind CSS with custom theming
+- Backend & Database: Supabase (PostgreSQL) with serverless API routes
+- Authentication: SIWE for secure wallet-based login
+- Storage: IPFS public gateway for metadata
+- Hosting: Vercel for optimized deployment
+- Development: ESLint, Git, environment variables, reusable components
 
-This project demonstrates full-stack development skills, payment gateway integration, and modern e-commerce best practices.`,
+**Purpose & Impact:**
+BUILDRIFT demonstrates full-stack MVP development from scratch, connecting backend, frontend, and decentralized storage for a live Web3 product. The project showcases problem scoping, developer judgment, and execution on real blockchain workflows, providing tangible, deployable infrastructure that bridges traditional web development with Web3 technologies.
+
+**What This Demonstrates:**
+- Full-stack Web3 application architecture
+- Blockchain integration and wallet authentication
+- Decentralized storage implementation
+- Modern Next.js App Router patterns
+- TypeScript for type-safe development
+- Production-ready deployment practices`,
     images: [
-      "/assets/projects/hero-back.jpg"
+      "/assets/projects/buildrifht.jpeg"
     ],
     category: "fullstack",
-    technologies: ["React", "Next.js", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
-    liveLink: "#",
-    githubLink: "#",
-    featured: false
+    technologies: ["Next.js", "React", "TypeScript", "Supabase", "IPFS", "Tailwind CSS", "SIWE", "Vercel"],
+    liveLink: "https://buildrift.vercel.app/",
+    githubLink: "https://github.com/eff-1/buildrift",
+    featured: true,
+    ongoing: true
   },
   {
     id: 8,
-    title: "Weather Dashboard",
-    description: "Interactive weather application with forecasting",
-    longDescription: `A beautiful and intuitive weather dashboard that provides real-time weather information and forecasts for locations worldwide.
+    title: "Stephotech Student Portal",
+    description: "Comprehensive learning management system for technology academy",
+    longDescription: `Stephotech Student Portal is a comprehensive web application built for a technology-focused academy, designed to streamline student learning, course management, and administrative workflows. The platform offers a fully responsive, modern interface for students, instructors, and administrators.
 
 **Core Features:**
-- Current weather conditions with detailed metrics
-- 7-day weather forecast with hourly breakdowns
-- Interactive weather maps with radar and satellite imagery
-- Location-based weather alerts and notifications
-- Weather history and trends analysis
-- Customizable dashboard with favorite locations
-- Dark/light theme support
-- Offline functionality with cached data
+- Student Dashboard: Track courses, view progress, check grades, and access assignments
+- Course Management: Instructors upload lessons, videos, assignments, and resources
+- Interactive Learning: Multimedia resources, downloadable materials, and integrated assessments
+- Real-time Notifications: Assignment deadlines, announcements, and course updates
+- Role-Based Access: Secure JWT authentication for students, instructors, and admins
+- Admin Dashboard: Monitor student activity, manage courses, and track progress metrics
+- Responsive Design: Seamless experience across desktop, tablet, and mobile devices
 
-**Technical Highlights:**
-- Built with React and TypeScript for type safety
-- Integration with OpenWeatherMap API
-- Geolocation services for automatic location detection
-- Progressive Web App (PWA) capabilities
-- Chart.js for weather data visualization
-- Local storage for user preferences
-- Responsive design with CSS Grid and Flexbox
+**Technical Implementation:**
+- Frontend: React with Tailwind CSS for modern, responsive UI
+- Backend: Node.js + Express REST API architecture
+- Database: MongoDB for scalable, high-performance data storage
+- Authentication: JWT-based secure user sessions with role management
+- File Management: Support for multimedia content and document uploads
+- Real-time Updates: WebSocket integration for live notifications
+- API Design: RESTful endpoints for all platform operations
+- Hosting: Cloud deployment for reliability and performance
 
-Perfect example of API integration, data visualization, and modern frontend development practices.`,
+**User Roles & Capabilities:**
+- Students: Course enrollment, content access, assignment submission, progress tracking
+- Instructors: Content creation, student management, grading, analytics
+- Administrators: System oversight, user management, reporting, configuration
+
+**Business Value:**
+This portal transforms how Stephotech manages its educational ecosystem, providing a modern, tech-driven platform that enhances learning, improves communication, and automates administrative tasks. It exemplifies the application of modern web technologies to create a seamless, scalable, and engaging learning experience that benefits all stakeholders.`,
     images: [
-      "/assets/projects/hero-back.jpg"
+      "/assets/projects/studentportal.jpeg"
     ],
-    category: "frontend",
-    technologies: ["React", "TypeScript", "Chart.js", "PWA", "CSS Grid", "OpenWeather API"],
-    liveLink: "#",
+    category: "fullstack",
+    technologies: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "JWT", "WebSockets"],
+    liveLink: "https://www.stephotec.com/students/",
     githubLink: "#",
     featured: false
   },
   {
     id: 9,
-    title: "Social Media Analytics",
-    description: "Comprehensive social media monitoring and analytics platform",
-    longDescription: `An advanced analytics platform that helps businesses track, analyze, and optimize their social media presence across multiple platforms.
+    title: "Pixel Academy",
+    description: "Interactive student portal and programs platform for digital skills",
+    longDescription: `Pixel Academy is an interactive full-stack platform designed to showcase educational programs, manage student inquiries, and empower young learners to explore digital skills. The platform combines a modern frontend with a scalable backend to deliver a smooth, responsive, and user-friendly experience.
 
-**Platform Features:**
-- Multi-platform social media monitoring (Twitter, Instagram, Facebook, LinkedIn)
-- Real-time engagement tracking and sentiment analysis
-- Competitor analysis and benchmarking tools
-- Automated reporting with customizable dashboards
-- Content performance analytics and optimization suggestions
-- Influencer identification and outreach management
-- Social listening for brand mentions and trends
-- ROI tracking for social media campaigns
+**Featured Programs:**
+- Game Development: Unity, Unreal Engine, game design fundamentals
+- Digital Art & Design: Adobe Creative Suite, illustration, animation
+- Web Development: HTML, CSS, JavaScript, React, full-stack development
+- Robotics & AI: Arduino, Python, machine learning basics
+- Cybersecurity: Ethical hacking, network security, digital safety
+- Data Science: Python, data analysis, visualization, statistics
 
-**Technical Architecture:**
-- Microservices architecture with Docker containers
-- React frontend with Redux for state management
-- Node.js backend with Express and GraphQL
-- PostgreSQL database with Redis caching
-- Machine learning models for sentiment analysis
-- Real-time data processing with WebSockets
-- Automated data collection with scheduled jobs
-- RESTful APIs for third-party integrations
+**Core Features:**
+- Program Exploration: Detailed pages with duration, age groups, and descriptions
+- Filter & Sort: Programs by category, popularity, or age suitability
+- Contact & Inquiry Form: Full-stack form submission with email notifications
+- Why Choose Us Section: Highlights innovative curriculum and expert mentors
+- Featured Mentors: Showcase of experienced instructors and industry professionals
+- Responsive Design: Mobile-first approach with smooth transitions and animations
+- Interactive Components: Sliders, modal pop-ups, dynamic navigation
 
-This project showcases advanced full-stack development, data analytics, machine learning integration, and scalable system architecture.`,
+**Technical Implementation:**
+- Frontend: React with Tailwind CSS for responsive, modern design
+- Backend: Node.js + Express API for form handling and dynamic data
+- Database: MongoDB for storing inquiries and program details
+- Email Service: NodeMailer for automated inquiry notifications
+- Deployment: Vercel (frontend) and Render (backend) for full-stack hosting
+- Components: Reusable React components for maintainable code
+- SEO: Optimized structure for search visibility and accessibility
+
+**Future-Ready Features:**
+- User authentication for student login and course tracking
+- Progress monitoring and achievement tracking
+- Payment system integration for program enrollment
+- Student dashboard with personalized learning paths
+- Certificate generation upon course completion
+
+**Why This Stands Out:**
+Pixel Academy demonstrates the ability to build an engaging educational platform that combines marketing, inquiry management, and program showcase in a single, cohesive application. The clean architecture and modern tech stack make it easily scalable for future enhancements like full LMS capabilities.`,
     images: [
-      "/assets/projects/hero-back.jpg"
+      "/assets/projects/pixel-academy.jpg"
     ],
     category: "fullstack",
-    technologies: ["React", "Node.js", "GraphQL", "PostgreSQL", "Redis", "Docker", "Machine Learning"],
-    liveLink: "#",
+    technologies: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "NodeMailer", "Vercel"],
+    liveLink: "https://pixel-git-main-faruqs-projects-aeaad191.vercel.app/",
     githubLink: "#",
     featured: false
   }

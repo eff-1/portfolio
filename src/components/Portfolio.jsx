@@ -10,6 +10,7 @@ const Portfolio = () => {
   const [showAllTechs, setShowAllTechs] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [showFullPage, setShowFullPage] = useState(false);
   const mobileSliderRef = useRef(null);
 
   // All available technologies from projects
@@ -86,7 +87,7 @@ const Portfolio = () => {
           // MOBILE: Instagram Story Style
           <div className="mobile-portfolio">
             <div className="mobile-header">
-              <h2 className="section-title">Portfolio</h2>
+              <h2 className="section-title">Projects</h2>
               <div className="title-underline"></div>
               <p className="section-subtitle">
                 Swipe to explore my projects
@@ -132,11 +133,16 @@ const Portfolio = () => {
                   key={project.id}
                   project={project}
                   onClick={() => {
-                    const scrollY = window.scrollY;
-                    setScrollPosition(scrollY);
-                    setSelectedProject(project);
-                    document.body.classList.add('modal-open');
-                    document.body.style.top = `-${scrollY}px`;
+                    if (isMobile) {
+                      setSelectedProject(project);
+                      setShowFullPage(true);
+                    } else {
+                      const scrollY = window.scrollY;
+                      setScrollPosition(scrollY);
+                      setSelectedProject(project);
+                      document.body.classList.add('modal-open');
+                      document.body.style.top = `-${scrollY}px`;
+                    }
                   }}
                   isActive={index === currentSlide}
                 />
@@ -158,10 +164,10 @@ const Portfolio = () => {
             <div className="portfolio-layout">
               {/* Left Side - Header */}
               <div className="portfolio-header">
-                <h2 className="section-title">Portfolio</h2>
+                <h2 className="section-title">Projects</h2>
                 <div className="title-underline"></div>
                 <p className="section-description">
-                  Explore my latest web development projects showcasing modern technologies and innovative solutions
+                  Explore some of  my digital projects showcasing modern technologies and innovative solutions
                 </p>
               </div>
 
@@ -170,6 +176,7 @@ const Portfolio = () => {
                 {/* Tech Filters */}
                 <div className="tech-filters">
                   <div className="filter-container">
+                    <span className="filter-label">Filter Projects:</span>
                     {keyTechs.map(tech => (
                       <button
                         key={tech}
@@ -288,16 +295,32 @@ const Portfolio = () => {
         </div>
       )}
 
-      {/* Project Modal */}
-      {selectedProject && (
+      {/* Project Modal/Full Page */}
+      {selectedProject && !showFullPage && (
         <ProjectModal 
           project={selectedProject} 
           onClose={() => {
             setSelectedProject(null);
             document.body.classList.remove('modal-open');
             document.body.style.top = '';
-            window.scrollTo(0, scrollPosition);
+            requestAnimationFrame(() => {
+              window.scrollTo({
+                top: scrollPosition,
+                behavior: 'instant'
+              });
+            });
           }} 
+        />
+      )}
+
+      {/* Mobile Full Page View */}
+      {selectedProject && showFullPage && isMobile && (
+        <MobileFullPageView
+          project={selectedProject}
+          onClose={() => {
+            setShowFullPage(false);
+            setSelectedProject(null);
+          }}
         />
       )}
     </section>
@@ -326,6 +349,9 @@ const MobileProjectCard = ({ project, onClick, isActive }) => {
     >
       <div className="mobile-card-image">
         <img src={images[currentImageIndex]} alt={project.title} />
+        {project.ongoing && (
+          <div className="ongoing-badge">Ongoing</div>
+        )}
         <div className="mobile-card-overlay">
           <Eye size={20} />
         </div>
@@ -376,6 +402,9 @@ const DesktopProjectCard = ({ project, onClick }) => {
     <div className="desktop-project-card" onClick={onClick}>
       <div className="desktop-card-image">
         <img src={images[currentImageIndex]} alt={project.title} />
+        {project.ongoing && (
+          <div className="ongoing-badge">Ongoing</div>
+        )}
         <div className="desktop-card-overlay">
           <Eye size={24} />
         </div>
@@ -531,6 +560,85 @@ const ProjectModal = ({ project, onClose }) => {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Mobile Full Page View Component
+const MobileFullPageView = ({ project, onClose }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = project.images || [project.image];
+  const hasMultipleImages = images.length > 1;
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  return (
+    <div className="mobile-full-page">
+      <div className="mobile-full-header">
+        <button className="mobile-close-btn" onClick={onClose}>
+          <X size={28} strokeWidth={2.5} />
+        </button>
+      </div>
+
+      <div className="mobile-full-content">
+        <div className="mobile-full-image">
+          <img src={images[currentImageIndex]} alt={project.title} />
+          {hasMultipleImages && (
+            <div className="mobile-full-indicators">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  className={`mobile-full-dot ${index === currentImageIndex ? 'active' : ''}`}
+                  onClick={() => setCurrentImageIndex(index)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="mobile-full-info">
+          <h2 className="mobile-full-title">{project.title}</h2>
+          
+          <p className="mobile-full-description">
+            {project.longDescription || project.description}
+          </p>
+
+          <div className="mobile-full-tech">
+            <h4>Technologies:</h4>
+            <div className="mobile-tech-tags">
+              {project.technologies.map((tech, index) => (
+                <span key={index} className="mobile-tech-tag">{tech}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mobile-full-actions">
+            <a 
+              href={project.liveLink}
+              className="mobile-full-btn primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink size={18} />
+              Visit Project
+            </a>
+            <a 
+              href={project.githubLink}
+              className="mobile-full-btn secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github size={18} />
+              Source Code
+            </a>
           </div>
         </div>
       </div>

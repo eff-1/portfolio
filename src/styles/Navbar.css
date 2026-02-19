@@ -30,8 +30,8 @@
 }
 
 .logo-text {
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 700;
   background: linear-gradient(135deg, var(--primary-color), var(--accent-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -40,10 +40,7 @@
 }
 
 .nav-logo a:hover .logo-text {
-  background: linear-gradient(135deg, var(--accent-blue), var(--primary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  filter: brightness(1.2);
 }
 
 /* Desktop Navigation */
@@ -228,8 +225,8 @@
     padding: 0.5rem 0;
   }
   
-  .logo-text {
-    font-size: 1.5rem;
+  .logo-image {
+    height: 35px;
   }
   
   .mobile-nav-content {
@@ -243,8 +240,8 @@
 }
 
 @media (max-width: 480px) {
-  .logo-text {
-    font-size: 1.25rem;
+  .logo-image {
+    height: 30px;
   }
   
   .mobile-nav-link {

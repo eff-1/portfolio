@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { 
   Code2, Server, Cloud, Filter, Zap, FileCode, Palette, Braces,
   Globe, Database, HardDrive, Terminal, GitBranch, Package, Rocket, 
-  Figma, Paintbrush, Code, Send
+  Figma, Paintbrush, Code, Send, Settings
 } from 'lucide-react';
 import { skillsData, mainSkills } from '../utils/skills';
 import '../styles/About.css';
-import profileImage from '../assets/profile-image.jpg';
+import profileImage from '/assets/projects/profile-imgae.jpeg';
 
 const About = () => {
   // Show 'frontend' by default on mobile, 'all' on desktop
@@ -96,17 +96,29 @@ const About = () => {
                 <img src={profileImage} alt="Ariyo Faruq"/>
                 <div className="image-overlay">
                   <div className="overlay-content">
-                    <h3>HafTech CEO</h3>
+                    <h3>Faruq Ariyo O.</h3>
                     <p>5+ Years Experience</p>
                   </div>
                 </div>
               </div>
+              
+              {/* Download CV Button */}
+              <a 
+                href="/assets/my-resume.pdf" 
+                download="Faruq.dev_Resume.pdf"
+                className="btn btn-gradient download-cv-btn"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <Send size={18} />
+                <span>Download Resume</span>
+              </a>
             </div>
 
             <div className="about-text" data-aos="fade-left">
               <div className="text-content">
                 <h3 className="about-title">
-                  Full Stack Developer & <span className="gradient-text">Tech Entrepreneur</span>
+                  Full Stack Developer & Software Engineer <span className="gradient-text">Tech Entrepreneur</span>
                 </h3>
                 
                 <p>
@@ -125,11 +137,11 @@ const About = () => {
 
                 <div className="achievements">
                   <div className="achievement-item">
-                    <span className="achievement-number">50+</span>
+                    <span className="achievement-number">34</span>
                     <span className="achievement-label">Projects Delivered</span>
                   </div>
                   <div className="achievement-item">
-                    <span className="achievement-number">30+</span>
+                    <span className="achievement-number">26+</span>
                     <span className="achievement-label">Happy Clients</span>
                   </div>
                   <div className="achievement-item">
@@ -140,7 +152,7 @@ const About = () => {
 
                 {/* Main Skills Progress */}
                 <div className="main-skills">
-                  <h4>⚙️ Core Competencies</h4>
+                  <h4><Settings size={20} style={{display: 'inline', marginRight: '8px'}} /> Core Competencies</h4>
                   {mainSkills.map((skill, index) => (
                     <div key={skill.name} className="skill-bar" data-aos="fade-up" data-aos-delay={index * 100}>
                       <div className="skill-info">

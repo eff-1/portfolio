@@ -51,9 +51,9 @@ const Contact = () => {
 
   const socialLinks = [
     { name: 'GitHub', icon: Github, url: 'https://github.com/eff-1', color: '#333' },
-    { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com/in/haftech', color: '#0077b5' },
-    { name: 'Twitter', icon: Twitter, url: 'https://twitter.com/haftech', color: '#1da1f2' },
-    { name: 'Instagram', icon: Instagram, url: 'https://instagram.com/haftech', color: '#e4405f' }
+    { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/faruq-ariyo-988844316', color: '#0077b5' },
+    { name: 'X', icon: Twitter, url: 'https://x.com/oladura_44', color: '#000000' },
+    { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/faruq_dev?igsh=bXZ4M2Q1Y3czNTNu', color: '#e4405f' }
   ];
 
   const quickContactMethods = [
@@ -98,19 +98,34 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      // Using Web3Forms - Free email service
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '5d104f71-daaa-4407-85e4-beb950c0d32a',
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          from_name: 'Portfolio Contact Form'
+        })
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
-      } else setSubmitStatus('error');
-    } catch {
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
